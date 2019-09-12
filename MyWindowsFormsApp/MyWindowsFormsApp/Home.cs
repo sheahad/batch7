@@ -16,5 +16,15 @@ namespace MyWindowsFormsApp
         {
             InitializeComponent();
         }
+
+        private void showButton_Click(object sender, EventArgs e)
+        {
+            string name = nameTextBox.Text;
+
+            MessageBox.Show("Hello ! " + name);
+            showLabel.Text = name;
+        }
+
+      
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace MyWindowsFormsApp
 {
-    partial class Home
+    partial class DatatypeUi
     {
         /// <summary>
         /// Required designer variable.
@@ -29,14 +29,12 @@
         private void InitializeComponent()
         {
             this.showButton = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
-            this.nameTextBox = new System.Windows.Forms.TextBox();
-            this.showLabel = new System.Windows.Forms.Label();
+            this.itemComboBox = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // showButton
             // 
-            this.showButton.Location = new System.Drawing.Point(253, 35);
+            this.showButton.Location = new System.Drawing.Point(337, 52);
             this.showButton.Name = "showButton";
             this.showButton.Size = new System.Drawing.Size(75, 23);
             this.showButton.TabIndex = 0;
@@ -44,52 +42,35 @@
             this.showButton.UseVisualStyleBackColor = true;
             this.showButton.Click += new System.EventHandler(this.showButton_Click);
             // 
-            // label1
+            // itemComboBox
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(31, 45);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(35, 13);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "Name";
+            this.itemComboBox.FormattingEnabled = true;
+            this.itemComboBox.Items.AddRange(new object[] {
+            "pen",
+            "pecin",
+            "marker",
+            "none"});
+            this.itemComboBox.Location = new System.Drawing.Point(84, 53);
+            this.itemComboBox.Name = "itemComboBox";
+            this.itemComboBox.Size = new System.Drawing.Size(121, 21);
+            this.itemComboBox.TabIndex = 1;
             // 
-            // nameTextBox
-            // 
-            this.nameTextBox.Location = new System.Drawing.Point(120, 38);
-            this.nameTextBox.Name = "nameTextBox";
-            this.nameTextBox.Size = new System.Drawing.Size(100, 20);
-            this.nameTextBox.TabIndex = 2;
-            // 
-            // showLabel
-            // 
-            this.showLabel.AutoSize = true;
-            this.showLabel.Location = new System.Drawing.Point(250, 101);
-            this.showLabel.Name = "showLabel";
-            this.showLabel.Size = new System.Drawing.Size(0, 13);
-            this.showLabel.TabIndex = 3;
-            // 
-            // Home
+            // DatatypeUi
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(374, 303);
-            this.Controls.Add(this.showLabel);
-            this.Controls.Add(this.nameTextBox);
-            this.Controls.Add(this.label1);
+            this.ClientSize = new System.Drawing.Size(468, 450);
+            this.Controls.Add(this.itemComboBox);
             this.Controls.Add(this.showButton);
-            this.Name = "Home";
-            this.Text = "Home";
+            this.Name = "DatatypeUi";
+            this.Text = "Data type";
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
 
         private System.Windows.Forms.Button showButton;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox nameTextBox;
-        private System.Windows.Forms.Label showLabel;
+        private System.Windows.Forms.ComboBox itemComboBox;
     }
 }
-
