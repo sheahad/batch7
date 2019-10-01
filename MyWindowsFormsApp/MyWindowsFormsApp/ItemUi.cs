@@ -1,14 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
-using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using MyWindowsFormsApp.BLL;
+using  MyWindowsFormsApp.Model;
 
 namespace MyWindowsFormsApp
 {
@@ -22,8 +21,14 @@ namespace MyWindowsFormsApp
 
         private void addButton_Click(object sender, EventArgs e)
         {
+            
+            Item item = new Item();
+
+
+            item.Name = nameTextBox.Text;
+            
             //Check UNIQUE
-            if (_itemManager.IsNameExists(nameTextBox.Text))
+            if (_itemManager.IsNameExists(item))
             {
                 MessageBox.Show(nameTextBox.Text + " Already Exists!");
                 return;
@@ -35,15 +40,17 @@ namespace MyWindowsFormsApp
                 MessageBox.Show("Price Can not be Empty!!!");
                 return;
             }
-
+            item.Price = Convert.ToDouble(priceTextBox.Text);
+            
             //Add/Insert Item
-            bool isAdded = _itemManager.Add(nameTextBox.Text, Convert.ToDouble(priceTextBox.Text));
+            bool isAdded = _itemManager.Add(item);
 
             if (isAdded)
             {
                 MessageBox.Show("Saved");
             }
             else
+            
             {
                 MessageBox.Show("Not Saved");
             }
@@ -61,14 +68,16 @@ namespace MyWindowsFormsApp
         {
 
             //Set Id as Mandatory
-            if (String.IsNullOrEmpty(idTextBox.Text))
-            {
-                MessageBox.Show("Id Can not be Empty!!!");
-                return;
-            }
+            //if (String.IsNullOrEmpty(idTextBox.Text))
+            //{
+            //    MessageBox.Show("Id Can not be Empty!!!");
+            //    return;
+            //}
 
+            MessageBox.Show("Name: " + itemComboBox.Text + " Id: "+ itemComboBox.SelectedValue);
+            
             //Delete
-            if (_itemManager.Delete(Convert.ToInt32(idTextBox.Text)))
+            if (_itemManager.Delete(Convert.ToInt32(itemComboBox.SelectedValue)))
             {
                 MessageBox.Show("Deleted");
             }
@@ -82,7 +91,7 @@ namespace MyWindowsFormsApp
 
         private void searchButton_Click(object sender, EventArgs e)
         {
-            Search(nameTextBox.Text);
+            showDataGridView.DataSource = _itemManager.Search(nameTextBox.Text);
         }
 
         private void updateButton_Click(object sender, EventArgs e)
@@ -100,7 +109,7 @@ namespace MyWindowsFormsApp
                 return;
             }
 
-            if (Update(nameTextBox.Text, Convert.ToDouble(priceTextBox.Text), Convert.ToInt32(idTextBox.Text)))
+            if (_itemManager.Update(nameTextBox.Text, Convert.ToDouble(priceTextBox.Text), Convert.ToInt32(idTextBox.Text)))
             {
                 MessageBox.Show("Updated");
                 showDataGridView.DataSource = _itemManager.Display();
@@ -111,81 +120,9 @@ namespace MyWindowsFormsApp
             }
         }
 
-   
-        //Method
-        
-      
-        
-        private bool Update(string name, double price, int id)
+        private void ItemUi_Load(object sender, EventArgs e)
         {
-            try
-            {
-                //Connection
-                string connectionString = @"Server=BITM-TRAINER-30\SQLEXPRESS; Database=CoffeeShop; Integrated Security=True";
-                SqlConnection sqlConnection = new SqlConnection(connectionString);
-
-                //Command 
-                //UPDATE Items SET Name =  'Hot' , Price = 130 WHERE ID = 1
-                string commandString = @"UPDATE Items SET Name =  '" + name + "' , Price = " + price + " WHERE ID = " + id + "";
-                SqlCommand sqlCommand = new SqlCommand(commandString, sqlConnection);
-
-                //Open
-                sqlConnection.Open();
-
-                //Insert
-                int isExecuted = sqlCommand.ExecuteNonQuery();
-                if (isExecuted > 0)
-                {
-                    return true;
-                }
-                //Close
-                sqlConnection.Close();
-
-
-            }
-            catch (Exception exeption)
-            {
-                MessageBox.Show(exeption.Message);
-            }
-            return false;
-        }
-        private void Search(string name)
-        {
-            try
-            {
-                //Connection
-                string connectionString = @"Server=BITM-TRAINER-30\SQLEXPRESS; Database=CoffeeShop; Integrated Security=True";
-                SqlConnection sqlConnection = new SqlConnection(connectionString);
-
-                //Command 
-                //INSERT INTO Items (Name, Price) Values ('Black', 120)
-                string commandString = @"SELECT * FROM Items WHERE Name='" + name + "'";
-                SqlCommand sqlCommand = new SqlCommand(commandString, sqlConnection);
-
-                //Open
-                sqlConnection.Open();
-
-                //Show
-                SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand);
-                DataTable dataTable = new DataTable();
-                sqlDataAdapter.Fill(dataTable);
-                if (dataTable.Rows.Count > 0)
-                {
-                    showDataGridView.DataSource = dataTable;
-                }
-                else
-                {
-                    MessageBox.Show("No Data Found");
-                }
-
-                //Close
-                sqlConnection.Close();
-
-            }
-            catch (Exception exeption)
-            {
-                MessageBox.Show(exeption.Message);
-            }
+            itemComboBox.DataSource = _itemManager.ItemCombo();
         }
     }
 }
