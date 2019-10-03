@@ -124,5 +124,12 @@ namespace MyWindowsFormsApp
         {
             itemComboBox.DataSource = _itemManager.ItemCombo();
         }
+
+        private void listButton_Click(object sender, EventArgs e)
+        {
+            ListUi listUi = new ListUi("Asif",10);
+            listUi.Show();
+            this.Hide();
+        }
     }
 }

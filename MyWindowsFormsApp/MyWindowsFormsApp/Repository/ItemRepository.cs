@@ -133,7 +133,7 @@ namespace MyWindowsFormsApp.Repository
             return false;
         }
 
-        public DataTable Display()
+        public List<Item> Display()
         {
            
                 //Connection
@@ -142,31 +142,47 @@ namespace MyWindowsFormsApp.Repository
 
                 //Command 
                 //INSERT INTO Items (Name, Price) Values ('Black', 120)
-                string commandString = @"SELECT o.Id, c.Name AS Customer,  i.Name AS Item, Quantity, i.Price, TotalPrice FROM Orders AS o LEFT JOIN Customers AS c ON c.Id = o.CustomerId LEFT JOIN Items AS i ON i.Id = o.ItemId";
+                string commandString = @"SELECT * FROM Items";
                 SqlCommand sqlCommand = new SqlCommand(commandString, sqlConnection);
 
                 //Open
                 sqlConnection.Open();
 
-                //Show
-                SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand);
-                DataTable dataTable = new DataTable();
-                sqlDataAdapter.Fill(dataTable);
+            //Show
+            //With DataAdapter
+            //SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand);
+            //DataTable dataTable = new DataTable();
+            //sqlDataAdapter.Fill(dataTable);
 
+            //With DataAdapter
+            SqlDataReader sqlDataReader = sqlCommand.ExecuteReader();
 
-                //if (dataTable.Rows.Count > 0)
-                //{
+            List<Item> items = new List<Item>();
 
-                //    //showDataGridView.DataSource = dataTable;
-                //}
-                //else
-                //{
-                //    //MessageBox.Show("No Data Found");
-                //}
+            while (sqlDataReader.Read())
+            {
+                Item item = new Item();
+                item.Id = Convert.ToInt32(sqlDataReader["Id"]);
+                item.Name = sqlDataReader["Name"].ToString();
+                item.Price = Convert.ToDouble(sqlDataReader["Price"]);
 
-                //Close
-                sqlConnection.Close();
-                return dataTable;
+                items.Add(item);
+            }
+
+            //if (dataTable.Rows.Count > 0)
+            //{
+
+            //    //showDataGridView.DataSource = dataTable;
+            //}
+            //else
+            //{
+            //    //MessageBox.Show("No Data Found");
+            //}
+
+            //Close
+            sqlConnection.Close();
+                //return dataTable;
+                return items; 
            
         }
 
@@ -214,6 +230,7 @@ namespace MyWindowsFormsApp.Repository
 
                 //Command 
                 //INSERT INTO Items (Name, Price) Values ('Black', 120)
+                //string commandString = @"SELECT * FROM Items WHERE Name='" + name + "'";
                 string commandString = @"SELECT * FROM Items WHERE Name='" + name + "'";
                 SqlCommand sqlCommand = new SqlCommand(commandString, sqlConnection);
 

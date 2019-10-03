@@ -26,7 +26,7 @@ namespace MyWindowsFormsApp.BLL
         {
             return _itemRepository.Delete(id);
         }
-        public DataTable Display()
+        public List<Item> Display()
         {
             return _itemRepository.Display();
         }

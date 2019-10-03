@@ -18,6 +18,12 @@ namespace MyWindowsFormsApp
         {
             InitializeComponent();
         }
+        public ListUi(string name, int age)
+        {
+            InitializeComponent();
+            nameTextBox.Text = name;
+            ageTextBox.Text = age.ToString();
+        }
 
         private void addButton_Click(object sender, EventArgs e)
         {
