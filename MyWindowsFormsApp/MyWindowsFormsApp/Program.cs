@@ -18,8 +18,8 @@ namespace MyWindowsFormsApp
             Application.SetCompatibleTextRenderingDefault(false);
 
             //Application.Run(new Home());
-            Application.Run(new OrderUi());
-            //Application.Run(new ItemUi());
+            //Application.Run(new OrderUi());
+            Application.Run(new ItemUi());
         }
     }
 }

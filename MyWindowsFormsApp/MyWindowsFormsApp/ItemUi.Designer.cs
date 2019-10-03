@@ -36,13 +36,17 @@
             this.addButton = new System.Windows.Forms.Button();
             this.showButton = new System.Windows.Forms.Button();
             this.showDataGridView = new System.Windows.Forms.DataGridView();
+            this.itemBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.deleteButton = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.idTextBox = new System.Windows.Forms.TextBox();
             this.updateButton = new System.Windows.Forms.Button();
             this.searchButton = new System.Windows.Forms.Button();
             this.itemComboBox = new System.Windows.Forms.ComboBox();
-            this.itemBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.Sl = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.priceDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.showDataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.itemBindingSource)).BeginInit();
             this.SuspendLayout();
@@ -101,11 +105,25 @@
             // 
             // showDataGridView
             // 
+            this.showDataGridView.AllowUserToAddRows = false;
+            this.showDataGridView.AllowUserToDeleteRows = false;
+            this.showDataGridView.AutoGenerateColumns = false;
             this.showDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.showDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Sl,
+            this.idDataGridViewTextBoxColumn,
+            this.nameDataGridViewTextBoxColumn,
+            this.priceDataGridViewTextBoxColumn});
+            this.showDataGridView.DataSource = this.itemBindingSource;
             this.showDataGridView.Location = new System.Drawing.Point(19, 151);
             this.showDataGridView.Name = "showDataGridView";
+            this.showDataGridView.ReadOnly = true;
             this.showDataGridView.Size = new System.Drawing.Size(404, 150);
             this.showDataGridView.TabIndex = 3;
+            // 
+            // itemBindingSource
+            // 
+            this.itemBindingSource.DataSource = typeof(MyWindowsFormsApp.Model.Item);
             // 
             // deleteButton
             // 
@@ -164,9 +182,33 @@
             this.itemComboBox.TabIndex = 4;
             this.itemComboBox.ValueMember = "Id";
             // 
-            // itemBindingSource
+            // Sl
             // 
-            this.itemBindingSource.DataSource = typeof(MyWindowsFormsApp.Model.Item);
+            this.Sl.HeaderText = "Sl";
+            this.Sl.Name = "Sl";
+            this.Sl.ReadOnly = true;
+            // 
+            // idDataGridViewTextBoxColumn
+            // 
+            this.idDataGridViewTextBoxColumn.DataPropertyName = "Id";
+            this.idDataGridViewTextBoxColumn.HeaderText = "Id";
+            this.idDataGridViewTextBoxColumn.Name = "idDataGridViewTextBoxColumn";
+            this.idDataGridViewTextBoxColumn.ReadOnly = true;
+            this.idDataGridViewTextBoxColumn.Visible = false;
+            // 
+            // nameDataGridViewTextBoxColumn
+            // 
+            this.nameDataGridViewTextBoxColumn.DataPropertyName = "Name";
+            this.nameDataGridViewTextBoxColumn.HeaderText = "Name";
+            this.nameDataGridViewTextBoxColumn.Name = "nameDataGridViewTextBoxColumn";
+            this.nameDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // priceDataGridViewTextBoxColumn
+            // 
+            this.priceDataGridViewTextBoxColumn.DataPropertyName = "Price";
+            this.priceDataGridViewTextBoxColumn.HeaderText = "Price";
+            this.priceDataGridViewTextBoxColumn.Name = "priceDataGridViewTextBoxColumn";
+            this.priceDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // ItemUi
             // 
@@ -212,5 +254,9 @@
         private System.Windows.Forms.Button searchButton;
         private System.Windows.Forms.ComboBox itemComboBox;
         private System.Windows.Forms.BindingSource itemBindingSource;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Sl;
+        private System.Windows.Forms.DataGridViewTextBoxColumn idDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn priceDataGridViewTextBoxColumn;
     }
 }
