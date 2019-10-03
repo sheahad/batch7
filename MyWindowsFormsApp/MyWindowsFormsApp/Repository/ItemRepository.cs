@@ -142,7 +142,7 @@ namespace MyWindowsFormsApp.Repository
 
                 //Command 
                 //INSERT INTO Items (Name, Price) Values ('Black', 120)
-                string commandString = @"SELECT * FROM Items";
+                string commandString = @"SELECT o.Id, c.Name AS Customer,  i.Name AS Item, Quantity, i.Price, TotalPrice FROM Orders AS o LEFT JOIN Customers AS c ON c.Id = o.CustomerId LEFT JOIN Items AS i ON i.Id = o.ItemId";
                 SqlCommand sqlCommand = new SqlCommand(commandString, sqlConnection);
 
                 //Open

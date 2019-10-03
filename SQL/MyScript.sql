@@ -1,13 +1,14 @@
 CREATE DATABASE CoffeeShop
+--DROP DATABASE CoffeeShop
 USE CoffeeShop
 
 CREATE TABLE Items(
-ID INT IDENTITY(1,1) PRIMARY KEY,
+ID INT IDENTITY(1,1)  PRIMARY KEY,
 Name VARCHAR(50),
 Price FLOAT
 )
 
-DROP TABLE Items
+--DROP TABLE Items
 
 INSERT INTO Items (ID, Name, Price) Values (1,'Black', 120)
 INSERT INTO Items (ID, Name, Price) Values (2,'Black', 120)
@@ -15,7 +16,6 @@ INSERT INTO Items ( Name, Price, ID) Values ('Cold', 100, 3)
 
 --INSERT INTO Item Values ('Hot', 120, 4)
 INSERT INTO Items Values (4,'Hot', 120)
-
 
 --INSERT INTO Items (Name, Price) Values ('Black', 120)
 INSERT INTO Items (Name, Price) Values ('Black', 120)
@@ -55,6 +55,7 @@ Name VARCHAR(50),
 Contact VARCHAR(50),
 )
 
+--DROP TABLE Customers
 INSERT INTO Customers VALUES ('Ali', 'Dhaka' ,'01311369369')
 INSERT INTO Customers VALUES ('Hasan', 'Sylhet' ,'01711369369')
 INSERT INTO Customers VALUES ('Rafi', 'BNorisal' ,'01811369369')
@@ -65,30 +66,55 @@ SELECT * FROM Customers
 CREATE TABLE Orders
 (
 Id INT IDENTITY(1,1) PRIMARY KEY,
-CustomerId INT FOREIGN KEY REFERENCES Customers(Id),
-ItemId INT FOREIGN KEY REFERENCES Items(Id),
+CustomerId INT REFERENCES Customers (Id),
+ItemId INT REFERENCES Items (Id),
 Quantity INT,
-TotalPrice FLOAT
+TotalPrice FLOAT,
 )
 
+
+CREATE TABLE Orders
+(
+Id INT IDENTITY(1,1) PRIMARY KEY,
+CustomerId INT,
+ItemId INT ,
+Quantity INT,
+TotalPrice FLOAT,
+)
+
+--DROP TABLE Orders
 INSERT INTO Orders VALUES (1, 1 , 5, 600)
 INSERT INTO Orders VALUES (1, 2 , 3, 240)
 INSERT INTO Orders VALUES (1, 3 , 2, 200)
+INSERT INTO Orders VALUES (1, 5 , 2, 200)--
 
 INSERT INTO Orders VALUES (2, 2 , 2, 160)
 INSERT INTO Orders VALUES (2, 3 , 3, 300)
 INSERT INTO Orders VALUES (2, 4 , 4, 400)
+INSERT INTO Orders VALUES (2, 5 , 4, 400)--
 
-INSERT INTO Orders VALUES (4, 4 , 4, 400)
-INSERT INTO Orders VALUES (3, 4 , 4, 400)
+INSERT INTO Orders VALUES (4, 3 , 2, 200)--
+INSERT INTO Orders VALUES (4, 4 , 2, 200)--
 
+INSERT INTO Orders VALUES (5, 5 , 2, 200)
+INSERT INTO Orders VALUES (5, 5 , 2, 200)
+
+DELETE FROM Customers WHERE ID =3
+SELECT * FROM Items
+SELECT * FROM Customers
 SELECT * FROM Orders
 
-DELETE FROM Customers WHERE ID = 3
+CREATE VIEW OrderDetailsView
+AS
+SELECT o.Id, CustomerId, c.Name AS Customer, ItemId, i.Name AS Item, Quantity, TotalPrice FROM Orders As o
+LEFT JOIN Customers as c ON c.Id = o.CustomerId 
+LEFT JOIN Items as i ON i.ID = o.ItemId
 
-SELECT o.Id, CustomerId,c.Name AS Customer, ItemId, i.Name AS Item, Quantity, i.Price, TotalPrice 
-FROM Orders AS o
-LEFT JOIN Customers AS c ON c.Id = o.CustomerId
-LEFT JOIN Items AS i ON i.Id = o.ItemId
+SELECT * FROM OrderDetailsView
 
-DELETE FROM Orders WHERE Id = 9
+DELETE FROM Orders WHERE ID =9
+
+SELECT o.Id, CustomerId, c.Name AS Customer,  Quantity, TotalPrice 
+FROM Orders As o
+FULL JOIN Customers as c ON c.Id = o.CustomerId 
+
