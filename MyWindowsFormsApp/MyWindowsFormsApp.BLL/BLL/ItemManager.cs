@@ -1,14 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Data;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Forms.VisualStyles;
-using MyWindowsFormsApp.Repository;
-using MyWindowsFormsApp.Model.Model;
 
-namespace MyWindowsFormsApp.BLL
+using  MyWindowsFormsApp.Model.Model;
+using MyWindowsFormsApp.Repository.Repository;
+
+using System.Data;
+
+namespace MyWindowsFormsApp.BLL.BLL
 {
     public class ItemManager
     {

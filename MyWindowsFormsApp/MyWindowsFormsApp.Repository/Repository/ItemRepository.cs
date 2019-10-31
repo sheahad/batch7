@@ -1,35 +1,34 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Data;
-using System.Data.SqlClient;
 using System.Text;
 using System.Threading.Tasks;
-using  MyWindowsFormsApp.Model;
+using  MyWindowsFormsApp.Model.Model;
+using System.Data;
+using System.Data.SqlClient;
 using System.Configuration;
-using MyWindowsFormsApp.Model.Model;
 
-namespace MyWindowsFormsApp.Repository
+
+namespace MyWindowsFormsApp.Repository.Repository
 {
     public class ItemRepository
     {
-        string connectionString = @"Server=BITM-TRAINER-30\SQLEXPRESS; Database=CoffeeShop; Integrated Security=True";
+        //string connectionString = @"Server=BITM-TRAINER-30\SQLEXPRESS; Database=CoffeeShop; Integrated Security=True";
         //SqlConnection sqlConnection = new SqlConnection(connectionString);
-         
-        
-        //SqlConnection sqlConnection = new SqlConnection(ConfigurationSettings.AppSettings["ConnectionString"]);
+
+
+        SqlConnection sqlConnection = new SqlConnection(ConfigurationSettings.AppSettings["ConnectionString"]);
 
         //or
-
-        SqlConnection sqlConnection = new SqlConnection(System.Configuration.ConfigurationSettings.AppSettings["ConnectionString"]);
-    public bool Add(Item item)
+        //SqlConnection sqlConnection = new SqlConnection(System.Configuration.ConfigurationSettings.AppSettings["ConnectionString"]);
+        public bool Add(Item item)
         {
             bool isAdded = false;
             try
             {
                 //Connection
                 //string connectionString = @"Server=BITM-TRAINER-30\SQLEXPRESS; Database=CoffeeShop; Integrated Security=True";
-                SqlConnection sqlConnection = new SqlConnection(connectionString);
+                //SqlConnection sqlConnection = new SqlConnection(connectionString);
 
                 //Command 
                 //INSERT INTO Items (Name, Price) Values ('Black', 120)
@@ -80,7 +79,7 @@ namespace MyWindowsFormsApp.Repository
             {
                 //Connection
                 //string connectionString = @"Server=BITM-TRAINER-30\SQLEXPRESS; Database=CoffeeShop; Integrated Security=True";
-                SqlConnection sqlConnection = new SqlConnection(connectionString);
+                //SqlConnection sqlConnection = new SqlConnection(connectionString);
 
                 //Command 
                 //INSERT INTO Items (Name, Price) Values ('Black', 120)
@@ -114,7 +113,7 @@ namespace MyWindowsFormsApp.Repository
             {
                 //Connection
                 //string connectionString = @"Server=BITM-TRAINER-30\SQLEXPRESS; Database=CoffeeShop; Integrated Security=True";
-                SqlConnection sqlConnection = new SqlConnection(connectionString);
+               // SqlConnection sqlConnection = new SqlConnection(connectionString);
 
                 //Command 
                 //DELETE FROM Items WHERE ID = 3
@@ -138,7 +137,7 @@ namespace MyWindowsFormsApp.Repository
             }
             catch (Exception exeption)
             {
-               // MessageBox.Show(exeption.Message);
+                // MessageBox.Show(exeption.Message);
             }
 
             return false;
@@ -146,18 +145,18 @@ namespace MyWindowsFormsApp.Repository
 
         public List<Item> Display()
         {
-           
-                //Connection
-                //string connectionString = @"Server=BITM-TRAINER-30\SQLEXPRESS; Database=CoffeeShop; Integrated Security=True";
-                SqlConnection sqlConnection = new SqlConnection(connectionString);
 
-                //Command 
-                //INSERT INTO Items (Name, Price) Values ('Black', 120)
-                string commandString = @"SELECT * FROM Items";
-                SqlCommand sqlCommand = new SqlCommand(commandString, sqlConnection);
+            //Connection
+            //string connectionString = @"Server=BITM-TRAINER-30\SQLEXPRESS; Database=CoffeeShop; Integrated Security=True";
+           // SqlConnection sqlConnection = new SqlConnection(connectionString);
 
-                //Open
-                sqlConnection.Open();
+            //Command 
+            //INSERT INTO Items (Name, Price) Values ('Black', 120)
+            string commandString = @"SELECT * FROM Items";
+            SqlCommand sqlCommand = new SqlCommand(commandString, sqlConnection);
+
+            //Open
+            sqlConnection.Open();
 
             //Show
             //With DataAdapter
@@ -192,9 +191,9 @@ namespace MyWindowsFormsApp.Repository
 
             //Close
             sqlConnection.Close();
-                //return dataTable;
-                return items; 
-           
+            //return dataTable;
+            return items;
+
         }
 
         public bool Update(string name, double price, int id)
@@ -203,7 +202,7 @@ namespace MyWindowsFormsApp.Repository
             {
                 //Connection
                 //string connectionString = @"Server=BITM-TRAINER-30\SQLEXPRESS; Database=CoffeeShop; Integrated Security=True";
-                SqlConnection sqlConnection = new SqlConnection(connectionString);
+                //SqlConnection sqlConnection = new SqlConnection(connectionString);
 
                 //Command 
                 //UPDATE Items SET Name =  'Hot' , Price = 130 WHERE ID = 1
@@ -237,7 +236,7 @@ namespace MyWindowsFormsApp.Repository
             {
                 //Connection
                 //string connectionString = @"Server=BITM-TRAINER-30\SQLEXPRESS; Database=CoffeeShop; Integrated Security=True";
-                SqlConnection sqlConnection = new SqlConnection(connectionString);
+                //SqlConnection sqlConnection = new SqlConnection(connectionString);
 
                 //Command 
                 //INSERT INTO Items (Name, Price) Values ('Black', 120)
@@ -252,7 +251,7 @@ namespace MyWindowsFormsApp.Repository
                 SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand);
                 //DataTable dataTable = new DataTable();
                 sqlDataAdapter.Fill(dataTable);
-              
+
 
                 //Close
                 sqlConnection.Close();
@@ -263,7 +262,7 @@ namespace MyWindowsFormsApp.Repository
                 //MessageBox.Show(exeption.Message);
             }
 
-            return dataTable; 
+            return dataTable;
         }
 
         public DataTable ItemCombo()
@@ -271,7 +270,7 @@ namespace MyWindowsFormsApp.Repository
 
             //Connection
             //string connectionString = @"Server=BITM-TRAINER-30\SQLEXPRESS; Database=CoffeeShop; Integrated Security=True";
-            SqlConnection sqlConnection = new SqlConnection(connectionString);
+            //SqlConnection sqlConnection = new SqlConnection(connectionString);
 
             //Command 
             //INSERT INTO Items (Name, Price) Values ('Black', 120)

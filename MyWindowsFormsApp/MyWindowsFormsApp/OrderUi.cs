@@ -7,8 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using MyWindowsFormsApp.BLL;
-using MyWindowsFormsApp.Model;
+using MyWindowsFormsApp.BLL.BLL;
+using MyWindowsFormsApp.Model.Model;
 
 namespace MyWindowsFormsApp
 {

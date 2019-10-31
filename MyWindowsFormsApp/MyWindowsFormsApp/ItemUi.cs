@@ -6,8 +6,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using MyWindowsFormsApp.BLL;
-using  MyWindowsFormsApp.Model;
+
+using MyWindowsFormsApp.Model.Model;
+using MyWindowsFormsApp.BLL.BLL;
 
 namespace MyWindowsFormsApp
 {
@@ -123,6 +124,13 @@ namespace MyWindowsFormsApp
         private void ItemUi_Load(object sender, EventArgs e)
         {
             itemComboBox.DataSource = _itemManager.ItemCombo();
+        }
+
+        private void listButton_Click(object sender, EventArgs e)
+        {
+            ListUi listUi = new ListUi("Asif",10);
+            listUi.Show();
+            this.Hide();
         }
     }
 }
