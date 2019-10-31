@@ -152,7 +152,11 @@
             // 
             // itemBindingSource
             // 
+<<<<<<< HEAD
             //this.itemBindingSource.DataSource = typeof(MyWindowsFormsApp.Model.Item);
+=======
+            this.itemBindingSource.DataSource = typeof(MyWindowsFormsApp.Model.Item);
+>>>>>>> 2847990bf9361017c52f9b2f45b3aede8e0ee469
             // 
             // deleteButton
             // 
